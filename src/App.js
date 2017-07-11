@@ -46,13 +46,15 @@ class BooksApp extends React.Component {
       
         BooksAPI.search(this.state.searchQuery)  
         .then((searchBooks) =>{
-            
+            this.setSearchBooks(searchBooks)
         })
         this.updateSearchQuery(this.state.newSearchQuery )
         
     }       
   }
-
+  setSearchBooks(searchBooks){
+  this.setState({searchBooks})
+  }
     
   render() {
     const {searchQuery, searchBooks, newSearchQuery} = this.state;

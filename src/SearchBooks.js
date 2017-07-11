@@ -42,8 +42,13 @@ class SearchBooks extends Component{
                 <input 
                     type="text"
                     placeholder="Search by title or author"
-                    value={query}
-                    onChange={(event) =>  onSearchQuery(event.target.value)}
+                    value={newSearchQuery}
+                    onChange={(event) =>  {
+                        event.preventDefault();
+                        onSearchQuery(event.target.value);
+                        }
+                    }
+                    
                 />
                  
                 </div>
