@@ -1,57 +1,36 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
 //import escapeRegExp from 'escape-string-regexp'
 // import sortBy from 'sort-by'
-import *  as BooksAPI  from './BooksAPI'
+//import *  as BooksAPI  from './BooksAPI'
 
 class SearchBooks extends Component{
-
- componentDidMount(){
-     BooksAPI.search(this.state.query)
-        .then((books) =>{
-            this.setState({books})
-        })
-   //  if(this.state.query){
-      //   this.updateBooks(this.state.query)
-          
-  //   }
- }
-
+    static PropTypes ={
+        
+        
+        onSearchQuery : PropTypes.func.isRequired
+    }
 
     state = {
-        query: '',
-        books: []
-        
+        query: ''
     }
+
     updateQuery = (query) => {
         this.setState({ query: query.trim()})
-        //this.updateBooks();
-       
-    }
-    thequery = this.state.query ;
-
-    updateBooks = () => {
-      this.componentDidMount()
-    }
-            
-    
-
-    
-   
-
-
-    clearQuery = () => {
-        this.setState({query: ''})
     }
 
     render(){
-        const {books, query} = this.state
+        const {searchBooks, onSearchQuery, searchQuery, newSearchQuery} = this.props
+        const {query} = this.state
         
-        console.log("query is : " + query)
-        console.log("number of books is: " + books.length)
+            
+        console.log("query is : " + newSearchQuery)
+        if(searchBooks){
+            console.log("number of books is: " + searchBooks.length)
+            console.log(searchBooks.map((searchBook) =>  (searchBook.title)))
 
-    
-
+        }
         return(
         <div className="search-books">
             <div className="search-books-bar">
@@ -64,14 +43,14 @@ class SearchBooks extends Component{
                     type="text"
                     placeholder="Search by title or author"
                     value={query}
-                    onChange={(event) => this.updateQuery(event.target.value)}
+                    onChange={(event) =>  onSearchQuery(event.target.value)}
                 />
                  
                 </div>
             </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>
-              hello{books}
+             
             </div>
         </div>
         )

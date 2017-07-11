@@ -62,14 +62,12 @@ class BookShelf extends Component{
 }
 
 class BookCase extends Component{
-  state = {books : []}
-
-  componentDidMount(){
+state= {books : []}
+ componentDidMount(){
     BooksAPI.getAll().then((books) =>{
       this.setState({books})
     })
   }
-
 
   handleChange = (event, book) =>{
     if(event.target.value === 'currentlyReading'){
