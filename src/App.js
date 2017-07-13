@@ -29,10 +29,10 @@ class BooksApp extends React.Component {
 
 
   updateNewSearchQuery = (newQuery) => {
-    if(newQuery){
+    
        this.setState({ newSearchQuery: newQuery}) 
 
-    }
+    
         
   }
 
@@ -52,6 +52,7 @@ class BooksApp extends React.Component {
         
     }       
   }
+  
   setSearchBooks(searchBooks){
   this.setState({searchBooks})
   }
