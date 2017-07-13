@@ -62,12 +62,18 @@ class BookShelf extends Component{
 }
 
 class BookCase extends Component{
-state= {books : []}
- componentDidMount(){
-    BooksAPI.getAll().then((books) =>{
-      this.setState({books})
-    })
+    static PropTypes = {
+      
+      handleChange : PropTypes.func.isRequired,
+      moveToCurrentlyReading : PropTypes.func.isRequired,
+      moveToRead : PropTypes.func.isRequired,
+      moveToWantToRead : PropTypes.func.isRequired,
+      books : PropTypes.array.isRequired,
+      listFormattedName : PropTypes.string.isRequired,
+      listName : PropTypes.string.isRequired
+
   }
+
 
   handleChange = (event, book) =>{
     if(event.target.value === 'currentlyReading'){
@@ -112,9 +118,30 @@ state= {books : []}
         <div className="list-books-content">
           <div>
 
-            <BookShelf handleChange={this.handleChange} moveToCurrentlyReading={this.moveToCurrentlyReading}   moveToRead={this.moveToRead} moveToWantToRead={this.moveToWantToRead}  books={this.state.books} listFormattedName='Currently Reading' listName='currentlyReading'/>
-            <BookShelf handleChange={this.handleChange} moveToCurrentlyReading={this.moveToCurrentlyReading}   moveToRead={this.moveToRead} moveToWantToRead={this.moveToWantToRead}  books={this.state.books}  listFormattedName='Read' listName='read'/>
-            <BookShelf  handleChange={this.handleChange} moveToCurrentlyReading={this.moveToCurrentlyReading}   moveToRead={this.moveToRead} moveToWantToRead={this.moveToWantToRead} books={this.state.books}   listFormattedName='Want to Read' listName='wantToRead'/>
+            <BookShelf 
+              handleChange={this.props.handleChange}
+              moveToCurrentlyReading={this.props.moveToCurrentlyReading}
+              moveToRead={this.props.moveToRead}
+              moveToWantToRead={this.props.moveToWantToRead}
+              books={this.props.books}
+              listFormattedName='Currently Reading'
+              listName='currentlyReading'/>
+            <BookShelf 
+              handleChange={this.props.handleChange} 
+              moveToCurrentlyReading={this.props.moveToCurrentlyReading}   
+              moveToRead={this.props.moveToRead} 
+              moveToWantToRead={this.props.moveToWantToRead}  
+              books={this.props.books}  
+              listFormattedName='Read' 
+              listName='read'/>
+            <BookShelf  
+              handleChange={this.props.handleChange} 
+              moveToCurrentlyReading={this.props.moveToCurrentlyReading}   
+              moveToRead={this.props.moveToRead} 
+              moveToWantToRead={this.props.moveToWantToRead} 
+              books={this.props.books}   
+              listFormattedName='Want to Read' 
+              listName='wantToRead'/>
           
           </div>
         </div>              

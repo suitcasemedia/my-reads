@@ -11,29 +11,21 @@ class BooksApp extends React.Component {
         
         searchBooks: [],
         searchQuery: '',
-        newSearchQuery: ''
+        newSearchQuery: '',
+        books: []
         
     }
 
  
-// event loop for listing books
-
- 
-  
+/*********************************************
+ *  handle search results
+ * ******************************************/
   updateSearchQuery = (query) => {
-    
-        this.setState({ searchQuery: query}) 
-        
+        this.setState({ searchQuery: query})       
   }
 
-
-
-  updateNewSearchQuery = (newQuery) => {
-    
-       this.setState({ newSearchQuery: newQuery}) 
-
-    
-        
+  updateNewSearchQuery = (newQuery) => { 
+       this.setState({ newSearchQuery: newQuery})           
   }
 
   clearSearchQuery = () => {
@@ -51,12 +43,63 @@ class BooksApp extends React.Component {
         this.updateSearchQuery(this.state.newSearchQuery )
         
     }       
-  }
-  
+  } 
   setSearchBooks(searchBooks){
   this.setState({searchBooks})
   }
+
+
+  /*********************************************
+ *  handle personal list
+ * ******************************************/
+
+ 
+ componentDidMount(){
+    BooksAPI.getAll().then((books) =>{
+      this.setState({books})
+    })
+  }
+  handleSearchChange = (event, book, shelf) =>{
     
+    alert('changing')
+    BooksAPI.update(book, shelf).then( book => {
+      this.setState(state => ({
+        books : state.books.concat([book])
+      }))
+    })
+  }
+
+  handleChange = (event, book) =>{
+    if(event.target.value === 'currentlyReading'){
+      this.moveToCurrentlyReading(book)
+    }
+    else if(event.target.value === 'read'){
+      this.moveToRead(book)
+    }
+    else if(event.target.value === 'wantToRead'){
+        this.moveToWantToRead(book)
+    }
+  }
+
+  moveToCurrentlyReading = (book) => {
+    this.setState((state) =>{
+      book.shelf = "currentlyReading"
+    })
+  }
+  moveToRead = (book) => {
+    this.setState((state) =>{
+        book.shelf = "read"
+      
+    })
+
+  }
+  moveToWantToRead = (book) => {
+    this.setState((state) =>{
+        book.shelf = "wantToRead"
+      
+    })
+  }
+
   render() {
     const {searchQuery, searchBooks, newSearchQuery} = this.state;
     return (
@@ -71,6 +114,7 @@ class BooksApp extends React.Component {
              searchBooks={searchBooks}
              searchQuery={searchQuery}
              newSearchQuery={newSearchQuery}
+             handleSearchChange={this.handleSearchChange}
             />
 
         )}    
@@ -79,7 +123,26 @@ class BooksApp extends React.Component {
           
         />
 
-        <Route path="/" exact books={this.state.books} component={BookCase}/>      
+        <Route
+           path="/" 
+           exact 
+          
+           render={()=> (
+             <BookCase
+              handleChange={this.handleChange}
+              moveToCurrentlyReading={this.moveToCurrentlyReading} 
+              moveToRead={this.moveToRead}
+              moveToWantToRead={this.moveToWantToRead}
+              books={this.state.books} 
+              listFormattedName='Currently Reading' 
+              listName='currentlyReading'
+
+             />
+           )
+
+           }
+          
+          />      
       </div>
     </BrowserRouter>
     )
