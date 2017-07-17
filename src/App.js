@@ -36,20 +36,17 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then((books) =>{
       this.setState({books})
     })
-
-    /*
-
+        
     if (this.state.newSearchQuery !==  this.state.searchQuery){
-      
+        console.log("this.state.searchQuery = " + this.state.searchQuery)
         BooksAPI.search(this.state.searchQuery)  
         .then((searchBooks) =>{
             this.setSearchBooks(searchBooks)
         })
         this.updateSearchQuery(this.state.newSearchQuery )
         
-    } 
+    }       
 
-    */   
 
   } 
   setSearchBooks(searchBooks){
@@ -95,11 +92,14 @@ class BooksApp extends React.Component {
       })
     
   }
-
+ 
   
 
   render() {
-    const {searchQuery, searchBooks, newSearchQuery} = this.state;
+    const {searchQuery, searchBooks, newSearchQuery, books} = this.state;
+    const wantToRead = books.filter(book => book.shelf === 'wantToRead')
+    const currentlyReading = books.filter(book => book.shelf === 'currentlyReading')
+    const read = books.filter(book => book.shelf === 'read')
     return (
     
     
@@ -108,13 +108,14 @@ class BooksApp extends React.Component {
           exact
           path="/add-a-book" 
           render={() => (
-            <SearchBooks
+          <SearchBooks
              onSearchQuery={this.updateNewSearchQuery}     
              searchBooks={searchBooks}
              searchQuery={searchQuery}
              newSearchQuery={newSearchQuery}
              handleSearchChange={this.handleSearchChange}
-            />
+           
+          />
 
         )}    
              
@@ -129,7 +130,9 @@ class BooksApp extends React.Component {
            render={()=> (
              <BookCase
               handleChange={this.handleChange}
-              books={this.state.books} 
+              wantToRead={wantToRead}
+              currentlyReading={currentlyReading}
+              read={read}
               listFormattedName='Currently Reading' 
               listName='currentlyReading'
 
