@@ -134,7 +134,8 @@ class BooksApp extends React.Component {
   render() {
     const {searchQuery, searchBooks, newSearchQuery} = this.state;
     return (
-    <BrowserRouter>
+    
+    
       <div className="app">
         <Route 
           exact
@@ -175,7 +176,7 @@ class BooksApp extends React.Component {
           
           />      
       </div>
-    </BrowserRouter>
+   
     )
   }
 }

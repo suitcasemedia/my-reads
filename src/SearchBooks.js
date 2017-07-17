@@ -15,7 +15,7 @@ class SearchBooks extends Component{
     }
 
     updateQuery = (query) => {
-        this.setState({ query: query.trim()})
+        this.setState({ query: query})
     }
 
     render(){
@@ -23,6 +23,7 @@ class SearchBooks extends Component{
         const {query} = this.state
     
         return(
+        
         <div className="search-books">
             <div className="search-books-bar">
                 <Link 
