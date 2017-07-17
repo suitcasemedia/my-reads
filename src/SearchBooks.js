@@ -16,6 +16,15 @@ class SearchBooks extends Component{
     }
 
     render(){
+         if (this.props.newSearchQuery !==  this.props.searchQuery){
+      
+        BooksAPI.search(this.props.searchQuery)  
+        .then((searchBooks) =>{
+            this.props.setSearchBooks(searchBooks)
+        })
+        this.props.updateSearchQuery(this.props.newSearchQuery )
+        
+    } 
         const {searchBooks, onSearchQuery, searchQuery, newSearchQuery} = this.props
         const {query} = this.state
     

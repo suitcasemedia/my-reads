@@ -36,6 +36,9 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then((books) =>{
       this.setState({books})
     })
+
+    /*
+
     if (this.state.newSearchQuery !==  this.state.searchQuery){
       
         BooksAPI.search(this.state.searchQuery)  
@@ -44,7 +47,10 @@ class BooksApp extends React.Component {
         })
         this.updateSearchQuery(this.state.newSearchQuery )
         
-    }       
+    } 
+
+    */   
+
   } 
   setSearchBooks(searchBooks){
   this.setState({searchBooks})
