@@ -1,7 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import BookCase from './ListBooks'
+import BookCase from './BookCase'
 import SearchBooks from './SearchBooks'
 import {BrowserRouter} from 'react-router-dom'
 import {Route} from 'react-router-dom'
@@ -77,59 +77,20 @@ class BooksApp extends React.Component {
   }
 
   handleChange = (event, book) =>{
+    let shelf = event.target.value
+     BooksAPI.update(book, shelf).then(() => {
+        book.shelf = shelf
+
+        // Filter out the book and append it to the end of the list
+        // so it appears at the end of whatever shelf it was added to.
+        this.setState(state => ({
+          books: state.books.filter(b => b.id !== book.id).concat([ book ])
+        }))
+      })
     
-    if(event.target.value === 'currentlyReading'){
-      let shelf = "currentlyReading"
-       BooksAPI.update(book,shelf).then( 
-      this.moveToCurrentlyReading(book)
-       )
-    }
-    else if(event.target.value === 'read'){
-       let shelf = "read"
-       BooksAPI.update(book,shelf).then( 
-      this.moveToRead(book)
-       )
-    }
-    else if(event.target.value === 'wantToRead'){
-       let shelf = "wantToRead"
-       BooksAPI.update(book,shelf).then( 
-        this.moveToWantToRead(book)
-       )
-    }
-     else if(event.target.value === 'none'){
-       let shelf = "none"
-       BooksAPI.update(book,shelf).then( 
-        this.moveToNone(book)
-       )
-    }
   }
 
-  moveToCurrentlyReading = (book) => {
-     
-    this.setState((state) =>{
-      book.shelf = "currentlyReading"
-    })
-   
-  }
-  moveToRead = (book) => {
-    this.setState((state) =>{
-        book.shelf = "read"
-      
-    })
-
-  }
-  moveToWantToRead = (book) => {
-    this.setState((state) =>{
-        book.shelf = "wantToRead"
-      
-    })
-  }
-  moveToWantToRead = (book) => {
-    this.setState((state) =>{
-        book.shelf = "none"
-      
-    })
-  }
+  
 
   render() {
     const {searchQuery, searchBooks, newSearchQuery} = this.state;
@@ -162,9 +123,6 @@ class BooksApp extends React.Component {
            render={()=> (
              <BookCase
               handleChange={this.handleChange}
-              moveToCurrentlyReading={this.moveToCurrentlyReading} 
-              moveToRead={this.moveToRead}
-              moveToWantToRead={this.moveToWantToRead}
               books={this.state.books} 
               listFormattedName='Currently Reading' 
               listName='currentlyReading'

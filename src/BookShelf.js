@@ -14,9 +14,6 @@ class BookShelf extends Component{
   static PropTypes = {
       
       handleChange : PropTypes.func.isRequired,
-      moveToCurrentlyReading : PropTypes.func.isRequired,
-      moveToRead : PropTypes.func.isRequired,
-      moveToWantToRead : PropTypes.func.isRequired,
       books : PropTypes.array.isRequired,
       listFormattedName : PropTypes.string.isRequired,
       listName : PropTypes.string.isRequired
@@ -69,9 +66,6 @@ class BookCase extends Component{
     static PropTypes = {
       
       handleChange : PropTypes.func.isRequired,
-      moveToCurrentlyReading : PropTypes.func.isRequired,
-      moveToRead : PropTypes.func.isRequired,
-      moveToWantToRead : PropTypes.func.isRequired,
       books : PropTypes.array.isRequired,
       listFormattedName : PropTypes.string.isRequired,
       listName : PropTypes.string.isRequired
@@ -93,25 +87,16 @@ class BookCase extends Component{
 
             <BookShelf 
               handleChange={this.props.handleChange}
-              moveToCurrentlyReading={this.props.moveToCurrentlyReading}
-              moveToRead={this.props.moveToRead}
-              moveToWantToRead={this.props.moveToWantToRead}
               books={this.props.books}
               listFormattedName='Currently Reading'
               listName='currentlyReading'/>
             <BookShelf 
-              handleChange={this.props.handleChange} 
-              moveToCurrentlyReading={this.props.moveToCurrentlyReading}   
-              moveToRead={this.props.moveToRead} 
-              moveToWantToRead={this.props.moveToWantToRead}  
+              handleChange={this.props.handleChange}  
               books={this.props.books}  
               listFormattedName='Read' 
               listName='read'/>
             <BookShelf  
               handleChange={this.props.handleChange} 
-              moveToCurrentlyReading={this.props.moveToCurrentlyReading}   
-              moveToRead={this.props.moveToRead} 
-              moveToWantToRead={this.props.moveToWantToRead} 
               books={this.props.books}   
               listFormattedName='Want to Read' 
               listName='wantToRead'/>
