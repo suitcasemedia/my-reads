@@ -39,31 +39,14 @@ class BookShelf extends Component{
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: "url(" + book.imageLinks.thumbnail + ")" }}></div>
             <div className="book-shelf-changer">                   
              
-                {book.shelf === 'currentlyReading' && 
-                 <select  className="browser-default" onClick={(event) => this.props.handleChange(event, book)} >
-                  <option selected="selected" value="currentlyReading"> Currently Reading</option>
+               
+                 <select defaultValue={book.shelf} className="browser-default" onClick={(event) => this.props.handleChange(event, book)} >
+                  <option  value="currentlyReading"> Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
                   <option  value="read">Read</option>
                   <option value="none">None</option>
                   </select>
-                 }
                 
-                 {book.shelf === 'wantToRead' && 
-                 <select  className="browser-default" onClick={(event) => this.props.handleChange(event, book)} >
-                  <option  value="currentlyReading"> Currently Reading</option>
-                  <option   selected="selected" value="wantToRead">Want to Read</option>
-                  <option  value="read">Read</option>
-                  <option value="none">None</option>
-                  </select>
-                 }
-                  {book.shelf === 'read' && 
-                 <select  className="browser-default" onClick={(event) => this.props.handleChange(event, book)} >
-                  <option  value="currentlyReading"> Currently Reading</option>
-                  <option value="wantToRead">Want to Read</option>
-                  <option  selected="selected" value="read">Read</option>
-                  <option value="none">None</option>
-                  </select>
-                 }
                
               
             </div>

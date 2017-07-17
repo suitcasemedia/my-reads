@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import BookCase from './ListBooks'
-import BookShelf from './ListBooks'
-//import escapeRegExp from 'escape-string-regexp'
-// import sortBy from 'sort-by'
-//import *  as BooksAPI  from './BooksAPI'
+
 
 class SearchBooks extends Component{
     static PropTypes ={
@@ -25,15 +21,7 @@ class SearchBooks extends Component{
     render(){
         const {searchBooks, onSearchQuery, searchQuery, newSearchQuery} = this.props
         const {query} = this.state
-        
-            
-        console.log("query is : " + newSearchQuery)
-        if(searchBooks){
-           // console.log("number of books is: " + searchBooks.length)
-           // console.log(searchBooks.map((searchBook) =>  (searchBook.title)))
-            // console.log(searchBooks.map((searchBook) =>  (searchBook)))
-
-        }
+    
         return(
         <div className="search-books">
             <div className="search-books-bar">
@@ -65,8 +53,8 @@ class SearchBooks extends Component{
                     <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: "url(" + book.imageLinks.thumbnail + ")" }}></div>
                         <div className="book-shelf-changer">                   
-                        <select  className="browser-default" onClick={(event) => this.props.handleSearchChange(event, book ,event.target.value)} >
-                            <option value="none" disabled>Move to...</option>
+                        <select defaultValue={book.shelf} className="browser-default" onClick={(event) => this.props.handleSearchChange(event, book ,event.target.value )} >
+                           
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
                             <option value="read">Read</option>

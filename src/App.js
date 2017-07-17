@@ -77,7 +77,7 @@ class BooksApp extends React.Component {
   }
 
   handleChange = (event, book) =>{
-      // alert(book)
+    
     if(event.target.value === 'currentlyReading'){
       let shelf = "currentlyReading"
        BooksAPI.update(book,shelf).then( 
