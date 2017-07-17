@@ -24,7 +24,7 @@ class BookShelf extends Component{
   }
 
 
-  render(){    
+  render(){  
     const listFormattedName = this.props.listFormattedName
     const books = this.props.books      
     return (<div className="bookshelf">
@@ -33,18 +33,39 @@ class BookShelf extends Component{
           
     {books.filter ((book) =>  book.shelf === this.props.listName ).map(book => (
         
-      <li key={book.title}>
+      <li key={book.id}>
         <div className="book">
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: "url(" + book.imageLinks.thumbnail + ")" }}></div>
             <div className="book-shelf-changer">                   
-              <select  className="browser-default" onClick={(event) => this.props.handleChange(event, book)} >
-                <option value="none" disabled>Move to...</option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
-                <option value="none">None</option>
-              </select>
+             
+                {book.shelf === 'currentlyReading' && 
+                 <select  className="browser-default" onClick={(event) => this.props.handleChange(event, book)} >
+                  <option selected="selected" value="currentlyReading"> Currently Reading</option>
+                  <option value="wantToRead">Want to Read</option>
+                  <option  value="read">Read</option>
+                  <option value="none">None</option>
+                  </select>
+                 }
+                
+                 {book.shelf === 'wantToRead' && 
+                 <select  className="browser-default" onClick={(event) => this.props.handleChange(event, book)} >
+                  <option  value="currentlyReading"> Currently Reading</option>
+                  <option   selected="selected" value="wantToRead">Want to Read</option>
+                  <option  value="read">Read</option>
+                  <option value="none">None</option>
+                  </select>
+                 }
+                  {book.shelf === 'read' && 
+                 <select  className="browser-default" onClick={(event) => this.props.handleChange(event, book)} >
+                  <option  value="currentlyReading"> Currently Reading</option>
+                  <option value="wantToRead">Want to Read</option>
+                  <option  selected="selected" value="read">Read</option>
+                  <option value="none">None</option>
+                  </select>
+                 }
+               
+              
             </div>
           </div>
           <div className="book-title">{book.title}</div>
@@ -74,37 +95,6 @@ class BookCase extends Component{
 
   }
 
-
-  handleChange = (event, book) =>{
-    if(event.target.value === 'currentlyReading'){
-      this.moveToCurrentlyReading(book)
-    }
-    else if(event.target.value === 'read'){
-      this.moveToRead(book)
-    }
-    else if(event.target.value === 'wantToRead'){
-        this.moveToWantToRead(book)
-    }
-  }
-
-  moveToCurrentlyReading = (book) => {
-    this.setState((state) =>{
-      book.shelf = "currentlyReading"
-    })
-  }
-  moveToRead = (book) => {
-    this.setState((state) =>{
-        book.shelf = "read"
-      
-    })
-
-  }
-  moveToWantToRead = (book) => {
-    this.setState((state) =>{
-        book.shelf = "wantToRead"
-      
-    })
-  }
 
   render(){
 

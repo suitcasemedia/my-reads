@@ -33,7 +33,9 @@ class BooksApp extends React.Component {
   }
 
   componentWillUpdate(){
-   
+    BooksAPI.getAll().then((books) =>{
+      this.setState({books})
+    })
     if (this.state.newSearchQuery !==  this.state.searchQuery){
       
         BooksAPI.search(this.state.searchQuery)  
@@ -46,6 +48,7 @@ class BooksApp extends React.Component {
   } 
   setSearchBooks(searchBooks){
   this.setState({searchBooks})
+   
   }
 
 
@@ -61,30 +64,52 @@ class BooksApp extends React.Component {
   }
   handleSearchChange = (event, book, shelf) =>{
     
-    alert('changing')
-    BooksAPI.update(book, shelf).then( book => {
+    BooksAPI.update(book, shelf).then( 
+    
+      book =>{
       this.setState(state => ({
         books : state.books.concat([book])
       }))
-    })
+    }
+    
+    )
+    this.handleChange = (event, book)
   }
 
   handleChange = (event, book) =>{
+      // alert(book)
     if(event.target.value === 'currentlyReading'){
+      let shelf = "currentlyReading"
+       BooksAPI.update(book,shelf).then( 
       this.moveToCurrentlyReading(book)
+       )
     }
     else if(event.target.value === 'read'){
+       let shelf = "read"
+       BooksAPI.update(book,shelf).then( 
       this.moveToRead(book)
+       )
     }
     else if(event.target.value === 'wantToRead'){
+       let shelf = "wantToRead"
+       BooksAPI.update(book,shelf).then( 
         this.moveToWantToRead(book)
+       )
+    }
+     else if(event.target.value === 'none'){
+       let shelf = "none"
+       BooksAPI.update(book,shelf).then( 
+        this.moveToNone(book)
+       )
     }
   }
 
   moveToCurrentlyReading = (book) => {
+     
     this.setState((state) =>{
       book.shelf = "currentlyReading"
     })
+   
   }
   moveToRead = (book) => {
     this.setState((state) =>{
@@ -96,6 +121,12 @@ class BooksApp extends React.Component {
   moveToWantToRead = (book) => {
     this.setState((state) =>{
         book.shelf = "wantToRead"
+      
+    })
+  }
+  moveToWantToRead = (book) => {
+    this.setState((state) =>{
+        book.shelf = "none"
       
     })
   }
