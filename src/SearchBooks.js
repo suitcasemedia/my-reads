@@ -64,7 +64,7 @@ class SearchBooks extends Component{
 
 
                             <div className="book-shelf-changer">                   
-                            <select defaultValue={book.shelf} className="browser-default" onClick={(event) => this.props.handleSearchChange(event, book ,event.target.value )} >
+                            <select defaultValue={book.shelf} className="browser-default" onChange={(event) => this.props.handleSearchChange(event, book ,event.target.value )} >
                             
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

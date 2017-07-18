@@ -68,23 +68,24 @@ class BooksApp extends React.Component {
     
   }
   handleSearchChange = (event, book, shelf) =>{
-    
-    BooksAPI.update(book, shelf).then( 
-    
-      book =>{
-      this.setState(state => ({
-        books : state.books.concat([book])
-      }))
+    if (book.shelf !=shelf) {
+      BooksAPI.update(book, shelf).then( 
+      
+        book =>{
+        this.setState(state => ({
+          books : state.books.concat([book])
+        }))
+      }
+      
+      )
+      this.handleChange = (event, book)
     }
-    
-    )
-    this.handleChange = (event, book)
   }
 
   handleChange = (event, book) =>{
-    let shelf = event.target.value
-     BooksAPI.update(book, shelf).then(() => {
-        book.shelf = shelf
+   
+     BooksAPI.update(book, event).then(() => {
+        book.shelf = event
 
         // Filter out the book and append it to the end of the list
         // so it appears at the end of whatever shelf it was added to.
@@ -108,27 +109,20 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route 
           exact
-          path="/add-a-book" 
+          path="/search" 
           render={() => (
           <SearchBooks
              onSearchQuery={this.updateNewSearchQuery}     
              searchBooks={searchBooks}
              searchQuery={searchQuery}
              newSearchQuery={newSearchQuery}
-             handleSearchChange={this.handleSearchChange}
-           
+             handleSearchChange={this.handleSearchChange}       
           />
-
-        )}    
-             
-         
-          
+        )}            
         />
-
         <Route
            path="/" 
-           exact 
-          
+           exact       
            render={()=> (
              <BookCase
               handleChange={this.handleChange}
@@ -136,13 +130,9 @@ class BooksApp extends React.Component {
               currentlyReading={currentlyReading}
               read={read}
              />
-           )
-
-           }
-          
+           )}
           />      
       </div>
-   
     )
   }
 }
