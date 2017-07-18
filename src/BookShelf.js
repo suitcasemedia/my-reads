@@ -55,7 +55,7 @@ class BookShelf extends Component{
     ))}     
     </ol>
     <div className="open-search">
-    <Link to="/add-a-book">Add a book</Link>
+    <Link to="/search">Add a book</Link>
     </div>  
   </div>  
       
