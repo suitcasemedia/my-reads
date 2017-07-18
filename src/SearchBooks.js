@@ -16,10 +16,14 @@ class SearchBooks extends Component{
         this.setState({ query: query})
     }
 
+    
+
     render(){
+         
       
         const {searchBooks, onSearchQuery,  newSearchQuery} = this.props
         const {query} = this.state
+           
     
         return(      
             <div className="search-books">
@@ -46,11 +50,19 @@ class SearchBooks extends Component{
                 <div className="search-books-results">
                 
                 <ol className="books-grid">
-                    { typeof searchBooks.map === "function"  && searchBooks.map((book) => (
-                            <li key={book.id}>
+                    { searchBooks && typeof searchBooks.map === "function"  && searchBooks.map((book) => (
+                    
+                    
+                        
+                    <li key={book.id}>
                         <div className="book">
                         <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: "url(" + book.imageLinks.thumbnail + ")" }}></div>
+                            <div className="book-cover" 
+                                
+                                
+                                style={book && book.imageLinks && { width: 128, height: 193, backgroundImage:"url(" + book.imageLinks.thumbnail + ")" ,backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}></div>
+
+
                             <div className="book-shelf-changer">                   
                             <select defaultValue={book.shelf} className="browser-default" onClick={(event) => this.props.handleSearchChange(event, book ,event.target.value )} >
                             

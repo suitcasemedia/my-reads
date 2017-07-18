@@ -1,5 +1,5 @@
 import React ,{Component} from 'react'
-import *  as BooksAPI  from './BooksAPI'
+
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 //import escapeRegExp from 'escape-string-regexp'
@@ -16,7 +16,7 @@ class BookShelf extends Component{
       handleChange : PropTypes.func.isRequired,
       books : PropTypes.array.isRequired,
       listFormattedName : PropTypes.string.isRequired,
-      listName : PropTypes.string.isRequired
+     
 
   }
 
@@ -28,12 +28,12 @@ class BookShelf extends Component{
             <h2 className="bookshelf-title">{listFormattedName}</h2>   
     <ol className="books-grid">
           
-    {books.filter ((book) =>  book.shelf === this.props.listName ).map(book => (
+    {books.map(book => (
         
       <li key={book.id}>
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: "url(" + book.imageLinks.thumbnail + ")" }}></div>
+            <div className="book-cover" style={book.imageLinks && { width: 128, height: 193,  backgroundImage: "url(" + book.imageLinks.thumbnail + ")" ,backgroundSize: 'cover', backgroundRepeat: 'no-repeat', }}></div>
             <div className="book-shelf-changer">                   
              
                

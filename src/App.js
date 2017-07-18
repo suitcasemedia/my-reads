@@ -63,7 +63,9 @@ class BooksApp extends React.Component {
  componentDidMount(){
     BooksAPI.getAll().then((books) =>{
       this.setState({books})
+     // console.log(this.state.books.map (book)=> book.title )
     })
+    
   }
   handleSearchChange = (event, book, shelf) =>{
     
@@ -133,9 +135,6 @@ class BooksApp extends React.Component {
               wantToRead={wantToRead}
               currentlyReading={currentlyReading}
               read={read}
-              listFormattedName='Currently Reading' 
-              listName='currentlyReading'
-
              />
            )
 

@@ -1,5 +1,4 @@
 import React ,{Component} from 'react'
-import *  as BooksAPI  from './BooksAPI'
 import BookShelf from './BookShelf'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -14,9 +13,9 @@ class BookCase extends Component{
     static PropTypes = {
       
       handleChange : PropTypes.func.isRequired,
-      books : PropTypes.array.isRequired,
-      listFormattedName : PropTypes.string.isRequired,
-      listName : PropTypes.string.isRequired
+      currentlyReading : PropTypes.array.isRequired,
+      read: PropTypes.array.isRequired,
+      wantToRead : PropTypes.array.isRequired
 
   }
 
@@ -35,19 +34,19 @@ class BookCase extends Component{
 
             <BookShelf 
               handleChange={this.props.handleChange}
-              books={this.props.books}
+              books={this.props.currentlyReading}
               listFormattedName='Currently Reading'
-              listName='currentlyReading'/>
+            />
             <BookShelf 
               handleChange={this.props.handleChange}  
-              books={this.props.books}  
+              books={this.props.read}  
               listFormattedName='Read' 
-              listName='read'/>
+            />
             <BookShelf  
               handleChange={this.props.handleChange} 
-              books={this.props.books}   
+              books={this.props.wantToRead}   
               listFormattedName='Want to Read' 
-              listName='wantToRead'/>
+            />
           
           </div>
         </div>              
