@@ -16,11 +16,7 @@ class BookShelf extends Component{
       handleChange : PropTypes.func.isRequired,
       books : PropTypes.array.isRequired,
       listFormattedName : PropTypes.string.isRequired,
-     
-
   }
-
-
   render(){  
     const listFormattedName = this.props.listFormattedName
     const books = this.props.books      

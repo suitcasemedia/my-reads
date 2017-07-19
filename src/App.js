@@ -68,7 +68,7 @@ class BooksApp extends React.Component {
     
   }
   handleSearchChange = (event, book, shelf) =>{
-    if (book.shelf !=shelf) {
+    if (book.shelf !== shelf) {
       BooksAPI.update(book, shelf).then( 
       
         book =>{
