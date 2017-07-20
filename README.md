@@ -2,6 +2,11 @@
 ## My Reads - 1st Homework for React Nano Degree
 
 
+
+### `npm install`
+
+Installs all the dependencies required for the application
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
