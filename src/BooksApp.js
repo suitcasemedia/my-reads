@@ -4,7 +4,7 @@ import './App.css'
 import BookCase from './BookCase'
 import SearchBooks from './SearchBooks'
 import ErrorFourZeroFour from './ErrorFourZeroFour'
-import {BrowserRouter} from 'react-router-dom'
+// mport {BrowserRouter} from 'react-router-dom'
 import {Route} from 'react-router-dom'
 import { Switch } from 'react-router'
 
@@ -34,10 +34,10 @@ class BooksApp extends React.Component {
       this.setState({searchQuery: ''})
   }
 
-  componentWillUpdate(){
-    BooksAPI.getAll().then((books) =>{
-      this.setState({books})
-    })
+   componentWillUpdate(){
+   // BooksAPI.getAll().then((books) =>{
+    // this.setState({books})
+ // })
         
     if (this.state.newSearchQuery !==  this.state.searchQuery){
         console.log("this.state.searchQuery = " + this.state.searchQuery)
@@ -79,20 +79,7 @@ class BooksApp extends React.Component {
     })
     
   }
-  handleSearchChange = (event, book, shelf) =>{
-    if (book.shelf !== shelf) {
-      BooksAPI.update(book, shelf).then( 
-      
-        book =>{
-        this.setState(state => ({
-          books : state.books.concat([book])
-        }))
-      }
-      
-      )
-      this.handleChange = (event, book)
-    }
-  }
+  
 
   handleChange = (event, book) =>{
    
@@ -130,7 +117,7 @@ class BooksApp extends React.Component {
              searchBooks={searchBooks}
              searchQuery={searchQuery}
              newSearchQuery={newSearchQuery}
-             handleSearchChange={this.handleSearchChange}       
+             handleSearchChange={this.handleChange}       
           />
         )}            
         />

@@ -1,5 +1,4 @@
 import React  from 'react'
-
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 //import escapeRegExp from 'escape-string-regexp'
@@ -33,7 +32,7 @@ function BookShelf (props){
             <div className="book-shelf-changer">                   
              
                
-                 <select defaultValue={book.shelf} className="browser-default" onChange={(event) => this.props.handleChange(event.target.value, book)} >
+                 <select defaultValue={book.shelf} className="browser-default" onChange={(event) => props.handleChange(event.target.value, book)} >
                   <option  value="currentlyReading"> Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
                   <option  value="read">Read</option>
