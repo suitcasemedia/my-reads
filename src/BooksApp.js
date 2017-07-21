@@ -3,8 +3,10 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookCase from './BookCase'
 import SearchBooks from './SearchBooks'
+import ErrorFourZeroFour from './ErrorFourZeroFour'
 import {BrowserRouter} from 'react-router-dom'
 import {Route} from 'react-router-dom'
+import { Switch } from 'react-router'
 
 class BooksApp extends React.Component {
   state = {
@@ -49,6 +51,16 @@ class BooksApp extends React.Component {
 
 
   } 
+
+/*****************************************************************
+ *  add the shelf that the book is on to your search results
+ *****************************************************************/
+
+  getBookShelf = (book) => {
+  const existingBook = this.state.books.find(b => b.id === book.id)
+  if (existingBook) return existingBook.shelf
+  return book.shelf
+}
   setSearchBooks(searchBooks){
   this.setState({searchBooks})
    
@@ -107,11 +119,13 @@ class BooksApp extends React.Component {
     
     
       <div className="app">
+        <Switch>
         <Route 
           exact
           path="/search" 
           render={() => (
           <SearchBooks
+             getBookShelf={this.getBookShelf}
              onSearchQuery={this.updateNewSearchQuery}     
              searchBooks={searchBooks}
              searchQuery={searchQuery}
@@ -125,13 +139,16 @@ class BooksApp extends React.Component {
            exact       
            render={()=> (
              <BookCase
+              
               handleChange={this.handleChange}
               wantToRead={wantToRead}
               currentlyReading={currentlyReading}
               read={read}
              />
            )}
-          />      
+          /> 
+          <Route component={ErrorFourZeroFour}/>
+        </Switch>     
       </div>
     )
   }

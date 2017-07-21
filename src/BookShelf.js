@@ -1,4 +1,4 @@
-import React ,{Component} from 'react'
+import React  from 'react'
 
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -9,17 +9,17 @@ import PropTypes from 'prop-types'
 
 
 
-class BookShelf extends Component{
+function BookShelf (props){
        
-  static PropTypes = {
+ BookShelf.PropTypes = {
       
       handleChange : PropTypes.func.isRequired,
       books : PropTypes.array.isRequired,
       listFormattedName : PropTypes.string.isRequired,
   }
-  render(){  
-    const listFormattedName = this.props.listFormattedName
-    const books = this.props.books      
+ 
+    const listFormattedName = props.listFormattedName
+    const books = props.books      
     return (<div className="bookshelf">
             <h2 className="bookshelf-title">{listFormattedName}</h2>   
     <ol className="books-grid">
@@ -56,7 +56,7 @@ class BookShelf extends Component{
   </div>  
       
   )}
-}
+
 
  
     

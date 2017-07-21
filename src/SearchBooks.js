@@ -6,15 +6,14 @@ import PropTypes from 'prop-types'
 
 class SearchBooks extends Component{
     static PropTypes ={       
-        onSearchQuery : PropTypes.func.isRequired
+        onSearchQuery : PropTypes.func.isRequired,
+        searchBooks: PropTypes.array.isRequired,
+        getBookShelf : PropTypes.func.isRequired,
+        searchQuery : PropTypes.string.isRequired,
+        newSearchQuery : PropTypes.string.isRequired,
+        handleSearchChange : PropTypes.func.isRequired
     }
-    state = {
-        query: ''
-    }
-
-    updateQuery = (query) => {
-        this.setState({ query: query})
-    }
+    
 
     
 
@@ -22,7 +21,7 @@ class SearchBooks extends Component{
          
       
         const {searchBooks, onSearchQuery,  newSearchQuery} = this.props
-        const {query} = this.state
+      
            
     
         return(      
@@ -64,7 +63,7 @@ class SearchBooks extends Component{
 
 
                             <div className="book-shelf-changer">                   
-                            <select defaultValue={book.shelf} className="browser-default" onChange={(event) => this.props.handleSearchChange(event, book ,event.target.value )} >
+                            <select defaultValue={this.props.getBookShelf(book)} className="browser-default" onChange={(event) => this.props.handleSearchChange(event, book ,event.target.value )} >
                             
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
