@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-
+import {debounce} from 'lodash'
 
 
 class SearchBooks extends Component{
@@ -14,7 +14,9 @@ class SearchBooks extends Component{
     }
 
     render(){   
-        const {searchBooks, newSearchQuery,  handleSearchChange} = this.props  
+       
+        const {searchBooks, newSearchQuery,  handleSearchChange} = this.props 
+        const handleChangeDebounced = debounce(handleSearchChange, 200); 
         return(      
             <div className="search-books">
                 <div className="search-books-bar">
@@ -29,7 +31,7 @@ class SearchBooks extends Component{
                         value={newSearchQuery}
                         onChange={(event) =>  {
                             event.preventDefault();
-                            handleSearchChange(event.target.value);
+                             handleChangeDebounced(event.target.value);
                             }
                         }                 
                     />                  
