@@ -21,9 +21,13 @@ body, .app {
   color: white;
 }
 
-.list-books-content , .wrapper{
+.list-books-content{
   padding: 0 0 80px;
   flex: 1;
+}
+.wrapper{
+  width: 68em;
+  margin: auto;
 }
 
 .bookshelf {

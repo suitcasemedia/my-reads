@@ -10,7 +10,7 @@ function ErrorFourZeroFour (props){
  
        
     return (
-        <div class="wrapper">
+        <div className="wrapper">
             <h2>Error 404</h2>
             Page not found<br/>
             <Link to="/">Back to book listing</Link>

@@ -7,18 +7,21 @@ import ErrorFourZeroFour from './ErrorFourZeroFour'
 // mport {BrowserRouter} from 'react-router-dom'
 import {Route} from 'react-router-dom'
 import { Switch } from 'react-router'
+import {debounce} from 'lodash'
 
 class BooksApp extends React.Component {
-  state = {
-        
+  state = { 
         searchBooks: [],
         searchQuery: '',
         newSearchQuery: '',
-        books: []
-        
+        books: []    
     }
+    handleChangeDebounced = () =>{
+       debounce( BooksAPI.search, 200)
 
- 
+    }
+    
+      
 /*********************************************
  *  handle search results
  * ******************************************/
@@ -26,21 +29,21 @@ class BooksApp extends React.Component {
         this.setState({ searchQuery: query})       
   }
 
-  updateNewSearchQuery = (newQuery) => { 
-       this.setState({ newSearchQuery: newQuery})           
-  }
 
   clearSearchQuery = () => {
       this.setState({searchQuery: ''})
+       this.setState({searchBooks: ''})
   }
 
-   componentWillUpdate(){
-   // BooksAPI.getAll().then((books) =>{
-    // this.setState({books})
- // })
-        
+   handleSearchChange = (newSearchEvent) =>{
+    
+    
+
+    this.setState({ newSearchQuery: newSearchEvent}) 
+
     if (this.state.newSearchQuery !==  this.state.searchQuery){
         console.log("this.state.searchQuery = " + this.state.searchQuery)
+
         BooksAPI.search(this.state.searchQuery)  
         .then((searchBooks) =>{
             this.setSearchBooks(searchBooks)
@@ -49,6 +52,9 @@ class BooksApp extends React.Component {
         
     }       
 
+    if(newSearchEvent === ''){
+       this.clearSearchQuery()
+    }
 
   } 
 
@@ -112,12 +118,11 @@ class BooksApp extends React.Component {
           path="/search" 
           render={() => (
           <SearchBooks
-             getBookShelf={this.getBookShelf}
-             onSearchQuery={this.updateNewSearchQuery}     
+             getBookShelf={this.getBookShelf} 
              searchBooks={searchBooks}
              searchQuery={searchQuery}
              newSearchQuery={newSearchQuery}
-             handleSearchChange={this.handleChange}       
+             handleSearchChange={this.handleSearchChange}       
           />
         )}            
         />

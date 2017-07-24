@@ -6,24 +6,15 @@ import PropTypes from 'prop-types'
 
 class SearchBooks extends Component{
     static PropTypes ={       
-        onSearchQuery : PropTypes.func.isRequired,
+       
         searchBooks: PropTypes.array.isRequired,
         getBookShelf : PropTypes.func.isRequired,
-        searchQuery : PropTypes.string.isRequired,
         newSearchQuery : PropTypes.string.isRequired,
         handleSearchChange : PropTypes.func.isRequired
     }
-    
 
-    
-
-    render(){
-         
-      
-        const {searchBooks, onSearchQuery,  newSearchQuery} = this.props
-      
-           
-    
+    render(){   
+        const {searchBooks, newSearchQuery,  handleSearchChange} = this.props  
         return(      
             <div className="search-books">
                 <div className="search-books-bar">
@@ -38,12 +29,10 @@ class SearchBooks extends Component{
                         value={newSearchQuery}
                         onChange={(event) =>  {
                             event.preventDefault();
-                            onSearchQuery(event.target.value);
+                            handleSearchChange(event.target.value);
                             }
-                        }
-                        
-                    />
-                    
+                        }                 
+                    />                  
                     </div>
                 </div>
                 <div className="search-books-results">
@@ -53,7 +42,7 @@ class SearchBooks extends Component{
                     
                     
                         
-                    <li key={book.id}>
+                    <li key={book.id+book.title}>
                         <div className="book">
                         <div className="book-top">
                             <div className="book-cover" 
