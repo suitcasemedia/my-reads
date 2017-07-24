@@ -25,30 +25,20 @@ class BooksApp extends React.Component {
   }
 
 
-  clearSearchQuery = () => {
-    this.setState({newSearchQuery: ''})
-      this.setState({searchQuery: ''})
-       this.setState({searchBooks: []})
-       console.log("running clear")
-  }
 
    handleSearchChange = (newSearchEvent) =>{
     this.setState({ newSearchQuery: newSearchEvent}) 
 
     if (this.state.newSearchQuery !==  this.state.searchQuery){
-       console.log("this.state.searchQuery = " , this.state.searchQuery)
-        console.log("this.state.newSearchQuery = " + this.state.newSearchQuery)
-        
-        BooksAPI.search(this.state.searchQuery)  
+     
+        BooksAPI.search(this.state.newSearchQuery)  
          
         .then((searchBooks) =>{
             this.setSearchBooks(searchBooks)
         })
         this.updateSearchQuery(this.state.newSearchQuery )     
     }       
-    if(newSearchEvent === ''){
-        this.clearSearchQuery()
-      }
+  
   } 
 
 /*****************************************************************
