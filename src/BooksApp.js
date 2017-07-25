@@ -25,7 +25,6 @@ class BooksApp extends React.Component {
   }
 
 
-
    handleSearchChange = (newSearchEvent) =>{
     this.setState({ newSearchQuery: newSearchEvent}) 
 
@@ -34,7 +33,15 @@ class BooksApp extends React.Component {
         BooksAPI.search(this.state.newSearchQuery)  
          
         .then((searchBooks) =>{
-            this.setSearchBooks(searchBooks)
+
+          if (this.state.searchBooks !== searchBooks) {
+              this.setState({
+                  searchBooks
+              })
+          }
+
+
+          
         })
         this.updateSearchQuery(this.state.newSearchQuery )     
     }       
@@ -46,6 +53,7 @@ class BooksApp extends React.Component {
  *****************************************************************/
 
   getBookShelf = (book) => {
+
   const existingBook = this.state.books.find(b => b.id === book.id)
   if (existingBook) return existingBook.shelf
   return book.shelf
@@ -54,7 +62,6 @@ class BooksApp extends React.Component {
   this.setState({searchBooks})
    
   }
-
 
   /*********************************************
  *  handle personal list
