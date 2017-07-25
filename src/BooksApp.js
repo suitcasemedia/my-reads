@@ -110,7 +110,8 @@ class BooksApp extends React.Component {
              searchBooks={searchBooks}
              searchQuery={searchQuery}
              newSearchQuery={newSearchQuery}
-             handleSearchChange={this.handleSearchChange}       
+             handleChange={this.handleChange}    
+             handleSearchChange={this.handleSearchChange}     
           />
         )}            
         />
