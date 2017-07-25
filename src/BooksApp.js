@@ -52,7 +52,7 @@ class BooksApp extends React.Component {
 
   getBookShelf = (book) => {
 
-  const existingBook = this.state.books.find(b => b.id === book.id)
+  const existingBook = this.state.books.find(b => b.id === book)
   if (existingBook) return existingBook.shelf
   return 'none'
 }
@@ -120,7 +120,7 @@ class BooksApp extends React.Component {
            exact       
            render={()=> (
              <BookCase
-              
+              getBookShelf={this.getBookShelf} 
               handleChange={this.handleChange}
               wantToRead={wantToRead}
               currentlyReading={currentlyReading}

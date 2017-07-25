@@ -10,7 +10,8 @@ function BookCase (props){
       handleChange : PropTypes.func.isRequired,
       currentlyReading : PropTypes.array.isRequired,
       read: PropTypes.array.isRequired,
-      wantToRead : PropTypes.array.isRequired
+      wantToRead : PropTypes.array.isRequired,
+      getBookShelf: PropTypes.func.isRequired
 
   }  
     
@@ -23,17 +24,19 @@ function BookCase (props){
           <div>
 
             <BookShelf
-              
+              getBookShelf={props.getBookShelf}
               handleChange={props.handleChange}
               books={props.currentlyReading}
               listFormattedName='Currently Reading'
             />
             <BookShelf 
+             getBookShelf={props.getBookShelf}
               handleChange={props.handleChange}  
               books={props.read}  
               listFormattedName='Read' 
             />
             <BookShelf  
+              getBookShelf={props.getBookShelf}
               handleChange={props.handleChange} 
               books={props.wantToRead}   
               listFormattedName='Want to Read' 

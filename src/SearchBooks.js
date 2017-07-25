@@ -17,7 +17,7 @@ class SearchBooks extends Component{
 
     render(){   
        
-        const {searchBooks, newSearchQuery,  handleSearchChange, handleChange} = this.props 
+        const {searchBooks, newSearchQuery,  handleSearchChange, handleChange, getBookShelf} = this.props 
         const handleChangeDebounced = debounce(handleSearchChange, 200); 
         return(      
             <div className="search-books">
@@ -48,6 +48,7 @@ class SearchBooks extends Component{
                         
                     <li key={book.id+book.title}>
                         <Book
+                        getBookShelf={getBookShelf}
                         handleChange={handleChange}
                         book={book}
                         />

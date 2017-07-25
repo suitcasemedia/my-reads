@@ -15,11 +15,13 @@ function BookShelf (props){
       
       handleChange : PropTypes.func.isRequired,
       books : PropTypes.array.isRequired,
-      listFormattedName : PropTypes.string.isRequired,
+      listFormattedName : PropTypes.string.isRequired
+     // getBookShelf: PropTypes.func.isRequired
   }
  
-    const listFormattedName = props.listFormattedName
-    const books = props.books      
+    
+    const {books, getBookShelf, listFormattedName ,handleChange}  = props  
+      
     return (<div className="bookshelf">
             <h2 className="bookshelf-title">{listFormattedName}</h2>   
     <ol className="books-grid">
@@ -27,7 +29,8 @@ function BookShelf (props){
     {books.map(book => (
       <li key={book.id+book.title}>
         <Book
-          handleChange={props.handleChange}
+          getBookShelf={getBookShelf}
+          handleChange={handleChange}
           book={book}
         />
       </li>
