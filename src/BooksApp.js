@@ -20,9 +20,7 @@ class BooksApp extends React.Component {
 /*********************************************
  *  handle search results
  * ******************************************/
-  updateSearchQuery = (query) => {
-        this.setState({ searchQuery: query})       
-  }
+ 
 
 
    handleSearchChange = (newSearchEvent) =>{
@@ -43,7 +41,7 @@ class BooksApp extends React.Component {
 
           
         })
-        this.updateSearchQuery(this.state.newSearchQuery )     
+        this.setState({ searchQuery: newSearchEvent})       
     }       
   
   } 
@@ -56,7 +54,7 @@ class BooksApp extends React.Component {
 
   const existingBook = this.state.books.find(b => b.id === book.id)
   if (existingBook) return existingBook.shelf
-  return book.shelf
+  return 'none'
 }
   setSearchBooks(searchBooks){
   this.setState({searchBooks})
